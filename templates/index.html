@@ -6,11 +6,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
   <title>Switchedule</title>
   <meta name="description" content="Nintendo Switch game release schedule">
+  <style>
+    body {
+      margin: 0 auto;
+    }
+
+    .canvas {
+      margin: 0 auto;
+      max-width: 500px;
+      background-color: gray;
+    }
+  </style>
 </head>
 
 <body>
 <div class="canvas">
-  <p>hello world</p>
+  <h1>{{ name }}</h1>
+  <ul>
+    {% for game in games %}
+      <div>{{ game.name }}</div>
+    {% endfor %}
+  </ul>
 </div>
 </body>
 </html>
