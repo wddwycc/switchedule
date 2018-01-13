@@ -1,4 +1,6 @@
 extern crate hyper;
+extern crate hyper_tls;
+extern crate tokio_core;
 extern crate futures;
 #[macro_use]
 extern crate tera;
@@ -13,6 +15,7 @@ extern crate lazy_static;
 
 mod models;
 mod server;
+mod crawler;
 
 use std::env;
 use hyper::server::Http;
@@ -28,7 +31,7 @@ fn main() {
             server.run().unwrap();
         }
         "crawler" => {
-            println!("crawling");
+            crawler::crawl_jp();
         }
         _ => {
             println!("Command not supported")

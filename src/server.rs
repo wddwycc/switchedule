@@ -29,19 +29,18 @@ impl Service for Nintendo {
     fn call(&self, req: Request) -> Self::Future {
         let mut response = Response::new();
         match (req.method(), req.path()) {
-            (&Method::Get, "/jp") => {
+            (&Method::Get, path) => {
                 // todo: serve crawled data instead
                 let data = Area {
-                    name: "Japan".to_string(),
+                    name: format!("{}", path),
                     games: vec![
                         Game { name: "Mario Odyssey".to_string() },
                     ],
                 };
-                let rv = TERA.render("index.html", &data).unwrap();
-                response.set_body(rv);
-            }
-            (&Method::Get, "/us") => {
-                response.set_body("us games");
+                match TERA.render("index.html", &data) {
+                    Ok(html) => { response.set_body(html); }
+                    Err(_) => { response.set_status(StatusCode::InternalServerError); }
+                };
             }
             _ => {
                 response.set_status(StatusCode::NotFound);
