@@ -15,7 +15,6 @@ extern crate lazy_static;
 
 mod models;
 mod server;
-mod crawler;
 
 use std::env;
 use hyper::server::Http;
@@ -31,7 +30,7 @@ fn main() {
             server.run().unwrap();
         }
         "crawler" => {
-            crawler::crawl_jp();
+            println!("I decide leave crawler to python")
         }
         _ => {
             println!("Command not supported")
